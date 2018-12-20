@@ -1,0 +1,16 @@
+Works:
+
+
+Converting normal json to Bulk acceptable json :  .[] | { index: { _index: "myindex", _type: "mytype" } }, .
+
+Loading data into elasticsearch from cmd:  curl -H "Content-Type: application/x-ndjson" -XPOST 					    					  "http://localhost:9200/bank/account/_bulk?pretty" --data-binary 
+
+@accounts.jsoC:Copy pasting the content as a compact file -- \Users\akuma425>type D:\Users\akuma425\Downloads\var\log\login_simple5.json | jq -c .[] >D:\Users\akuma425\Downloads\var\log\tt.jsonn
+
+
+HAVE TO CHECK IF WORKS:
+type D:\Users\akuma425\Downloads\var\log\login_simple5.json | jq -c .[] | { index: { _index: "myindex", _type: "mytype" } }, . >D:\Users\akuma425\Downloads\var\log\tt.json
+
+
+
+def add_id(prefix): [ foreach .[] as $o (0; . + 1; $o + {"id": (prefix + tostring) }) ]; add_id("xx_")
